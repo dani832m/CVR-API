@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="da-DK">
+<head>
+    <meta charset="utf-8" />
+    <title>CVR-API med jQuery og AJAX</title>
+    <meta name="description" content="Et API, der vha. jQuery og AJAX kan vise navn og beliggenhed på en specifik virksomhed, hvis brugeren indtaster CVR-nr.">
+    <meta name="keywords" content="CVR, API, jQuery, AJAX, JSON">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="background-color: azure; text-align: center; padding: 20px; font-family: Arial, Helvetica, sans-serif;">
+
+    <!-- Henter AJAX-biblioteket -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <script>
+        function cvrapi() {
+            // Angiver, at 'cvrnr' svarer til den værdi, brugeren indtaster i input-feltet
+            let cvrnr = document.getElementById("cvrnr").value;
+
+            // Anvender AJAX til at lave GET request på CVRAPI
+            $.ajax(
+                // JSON, der bl.a. definerer request-type og url
+                {
+                type: "GET",
+                dataType: "jsonp",
+                url: "//cvrapi.dk/api?search=" + cvrnr + "&country=dk",
+                success: function (b) {
+                    // Viser navn og by i 'id=result' hvis CPR-nr. findes i API
+                    document.getElementById("result").innerHTML = b.name + ".<br>Beliggende i " + b.city + ".";
+                }
+            });
+        }
+    </script>
+
+    <!-- Brugerindtastning -->
+    <p>Indtast CVR-nr. og du får oplyst virksomhed og beliggenhed.</p>
+    <input type="number" id="cvrnr"> <button onclick="cvrapi()">Søg</button>
+    <p id="result"></p>
+</body>
+</html>
