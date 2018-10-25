@@ -9,6 +9,14 @@
 </head>
 <body style="background-color: azure; text-align: center; padding: 20px; font-family: Arial, Helvetica, sans-serif;">
 
+    <!-- Brugerindtastning -->
+    <h2>CVR-API</h2>
+    <p>Indtast CVR-nr. og få oplyst virksomhed og beliggenhed.</p>
+    <div>
+        <input type="number" id="cvrnr"> <button onclick="cvrapi()">Søg</button>
+    </div>
+    <p id="result"></p>
+
     <!-- Henter AJAX-biblioteket -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
@@ -26,15 +34,10 @@
                 url: "//cvrapi.dk/api?search=" + cvrnr + "&country=dk",
                 success: function (b) {
                     // Viser navn og by i 'id=result' hvis CPR-nr. findes i API
-                    document.getElementById("result").innerHTML = b.name + ".<br>Beliggende i " + b.city + ".";
+                    document.getElementById("result").innerHTML = "<b>Info:</b><br>" + b.name + ".<br>Beliggende i " + b.city + ".";
                 }
             });
         }
     </script>
-
-    <!-- Brugerindtastning -->
-    <p>Indtast CVR-nr. og du får oplyst virksomhed og beliggenhed.</p>
-    <input type="number" id="cvrnr"> <button onclick="cvrapi()">Søg</button>
-    <p id="result"></p>
 </body>
 </html>
