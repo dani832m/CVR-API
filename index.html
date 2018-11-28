@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="da-DK">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <title>CVR-API med jQuery og AJAX</title>
+    <!-- Meta Content -->
     <meta name="description" content="Et API, der vha. jQuery og AJAX kan vise navn og beliggenhed på en specifik virksomhed, hvis brugeren indtaster CVR-nr.">
     <meta name="keywords" content="CVR, API, jQuery, AJAX, JSON">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="N4.DK">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body style="background-color: azure; text-align: center; padding: 20px; font-family: Arial, Helvetica, sans-serif;">
 
     <!-- Brugerindtastning -->
-    <h2>CVR-API</h2>
-    <p>Indtast CVR-nr. og få oplyst virksomhed og beliggenhed.</p>
-    <div>
-        <input type="number" id="cvrnr"> <button onclick="cvrapi()">Søg</button>
+    <div id="content" style="display: none;">
+        <h2>CVR-API</h2>
+        <p>Indtast CVR-nr. og få oplyst virksomhed og beliggenhed.</p>
+        <div>
+            <input type="number" id="cvrnr" placeholder="Fx 31661471"> <button onclick="cvrapi()">Søg</button>
+        </div>
+        <p id="result"></p>
     </div>
-    <p id="result"></p>
-
-    <!-- Henter AJAX-biblioteket -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <script>
         function cvrapi() {
@@ -38,6 +41,11 @@
                 }
             });
         }
+
+        // jQuery-magi laver fade in på indholdet
+        $(document).ready(function() {
+            $("div#content").fadeIn(800);
+        });
     </script>
 </body>
 </html>
